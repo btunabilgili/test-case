@@ -1,15 +1,10 @@
-using Microsoft.EntityFrameworkCore;
-using RiskAnalysis.Persistance.Contexts;
+using RiskAnalysis.Persistance.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-        b => b.MigrationsAssembly("RiskAnalysis.Persistance"));
-});
+builder.Services.AddPersistanceServices(builder.Configuration);
 
 var app = builder.Build();
 

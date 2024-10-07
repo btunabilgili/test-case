@@ -1,6 +1,6 @@
 ﻿namespace RiskAnalysis.Domain
 {
-    public class JobSubject : BaseEntity<Guid>
+    public class JobSubject : BaseEntity
     {
         public string SubjectDetails { get; set; }
 

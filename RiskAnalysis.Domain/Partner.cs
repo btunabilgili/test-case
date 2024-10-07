@@ -1,6 +1,6 @@
 ﻿namespace RiskAnalysis.Domain
 {
-    public class Partner : BaseEntity<Guid>
+    public class Partner : BaseEntity
     {
         public string PartnerName { get; set; }
         public string ContactInfo { get; set; }

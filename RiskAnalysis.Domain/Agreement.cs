@@ -1,6 +1,6 @@
 ﻿namespace RiskAnalysis.Domain
 {
-    public class Agreement : BaseEntity<Guid>
+    public class Agreement : BaseEntity
     {
         public DateTime AgreementDate { get; set; }
         public string AgreementDetails { get; set; }
