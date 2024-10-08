@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using RiskAnalysis.Application;
 using RiskAnalysis.Persistance.Extensions;
 
@@ -9,6 +10,18 @@ builder.Services.AddAutoMapper(typeof(Program), typeof(IApplicationService));
 
 builder.Services.AddPersistanceServices(builder.Configuration);
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/Logout";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+        options.SlidingExpiration = true;
+        options.AccessDeniedPath = "/Account/AccessDenied";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    });
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -18,6 +31,9 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+
 app.UseStaticFiles();
 
 app.UseRouting();

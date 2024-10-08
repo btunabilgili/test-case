@@ -9,7 +9,7 @@ using RiskAnalysis.WebUI.Models;
 
 namespace RiskAnalysis.WebUI.Controllers
 {
-    public class AgreementController(IAgreementService agreementService, IPartnerService partnerService, IMapper mapper) : Controller
+    public class AgreementController(IAgreementService agreementService, IPartnerService partnerService, IMapper mapper) : BaseController
     {
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {

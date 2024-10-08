@@ -6,7 +6,7 @@ using RiskAnalysis.WebUI.Models;
 
 namespace RiskAnalysis.WebUI.Controllers
 {
-    public class PartnerController(IPartnerService partnerService, IMapper mapper) : Controller
+    public class PartnerController(IPartnerService partnerService, IMapper mapper) : BaseController
     {
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {

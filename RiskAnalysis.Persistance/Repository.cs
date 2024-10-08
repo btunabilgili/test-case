@@ -54,9 +54,14 @@ namespace RiskAnalysis.Persistance
             return _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
-        public Task<T?> GetFirstOrDefault(CancellationToken cancellationToken = default)
+        public Task<T?> GetFirstOrDefaultAsync(Expression<Func<T, bool>>? predicate = null, CancellationToken cancellationToken = default)
         {
-            return _dbSet.FirstOrDefaultAsync(cancellationToken);
+            var queryable = _dbSet.AsQueryable();
+
+            if (predicate is not null)
+                queryable = queryable.Where(predicate);
+
+            return queryable.FirstOrDefaultAsync(cancellationToken);
         }
     }
 }
