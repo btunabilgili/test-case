@@ -37,7 +37,7 @@
 
     <div class="form-group">
         <label asp-for="Keywords"></label>
-        <input asp-for="Keywords" class="form-control" />
+        <select asp-for="Keywords" class="form-control" multiple="multiple"></select>
         <span asp-validation-for="Keywords" class="text-danger"></span>
     </div>
 
@@ -70,6 +70,14 @@
 
             $('#Status').select2({
                 placeholder: "Select a status",
+                allowClear: true,
+                theme: 'bootstrap-5'
+            });
+
+            $('#Keywords').select2({
+                tags: true,
+                tokenSeparators: [','],
+                placeholder: "Enter keywords",
                 allowClear: true,
                 theme: 'bootstrap-5'
             });

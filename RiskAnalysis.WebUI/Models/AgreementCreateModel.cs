@@ -14,7 +14,7 @@ namespace RiskAnalysis.WebUI.Models
         [Required]
         public string AgreementDetails { get; set; } = string.Empty;
         [Required]
-        public string Keywords { get; set; } = string.Empty;
+        public List<string> Keywords { get; set; } = [];
         [Required]
         public decimal? RiskLevel { get; set; }
         [Required]

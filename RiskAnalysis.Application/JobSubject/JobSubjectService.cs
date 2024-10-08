@@ -1,13 +1,10 @@
-﻿using ErrorOr;
-using RiskAnalysis.Application.JobSubject;
-
-namespace RiskAnalysis.Application
+﻿namespace RiskAnalysis.Application
 {
     public class JobSubjectService
     {
-        public async Task<ErrorOr<Success>> CreateJobSubject(JobSubjectDto jobSubjectDto)
-        {
+        //public async Task<ErrorOr<Success>> CreateJobSubject(JobSubjectDto jobSubjectDto)
+        //{
 
-        }
+        //}
     }
 }
