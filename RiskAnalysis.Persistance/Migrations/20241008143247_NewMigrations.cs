@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RiskAnalysis.Persistance.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class NewMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,13 +16,13 @@ namespace RiskAnalysis.Persistance.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PartnerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContactInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PartnerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -34,15 +34,16 @@ namespace RiskAnalysis.Persistance.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PartnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AgreementDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AgreementDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AgreementDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Keywords = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RiskLevel = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PartnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,7 +52,8 @@ namespace RiskAnalysis.Persistance.Migrations
                         name: "FK_Agreements_Partners_PartnerId",
                         column: x => x.PartnerId,
                         principalTable: "Partners",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,12 +61,13 @@ namespace RiskAnalysis.Persistance.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SubjectDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PartnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PartnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SubjectDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RiskScore = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -73,31 +76,8 @@ namespace RiskAnalysis.Persistance.Migrations
                         name: "FK_JobSubjects_Partners_PartnerId",
                         column: x => x.PartnerId,
                         principalTable: "Partners",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RiskAnalyses",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RiskScore = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    AnalysisDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    JobSubjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RiskAnalyses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RiskAnalyses_JobSubjects_JobSubjectId",
-                        column: x => x.JobSubjectId,
-                        principalTable: "JobSubjects",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -109,11 +89,6 @@ namespace RiskAnalysis.Persistance.Migrations
                 name: "IX_JobSubjects_PartnerId",
                 table: "JobSubjects",
                 column: "PartnerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RiskAnalyses_JobSubjectId",
-                table: "RiskAnalyses",
-                column: "JobSubjectId");
         }
 
         /// <inheritdoc />
@@ -121,9 +96,6 @@ namespace RiskAnalysis.Persistance.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Agreements");
-
-            migrationBuilder.DropTable(
-                name: "RiskAnalyses");
 
             migrationBuilder.DropTable(
                 name: "JobSubjects");

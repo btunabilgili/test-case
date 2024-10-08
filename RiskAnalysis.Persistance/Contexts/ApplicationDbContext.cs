@@ -8,6 +8,5 @@ namespace RiskAnalysis.Persistance.Contexts
         public DbSet<Agreement> Agreements { get; set; }
         public DbSet<Partner> Partners { get; set; }
         public DbSet<JobSubject> JobSubjects { get; set; }
-        public DbSet<Domain.RiskAnalysis> RiskAnalyses { get; set; }
     }
 }

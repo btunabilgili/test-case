@@ -32,24 +32,31 @@ namespace RiskAnalysis.Persistance.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("AgreementDetails")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("PartnerId")
+                    b.Property<string>("Keywords")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PartnerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("RiskLevel")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
@@ -72,15 +79,20 @@ namespace RiskAnalysis.Persistance.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("PartnerId")
+                    b.Property<Guid>("PartnerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<decimal?>("RiskScore")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("SubjectDetails")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
@@ -100,21 +112,25 @@ namespace RiskAnalysis.Persistance.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactInfo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PartnerName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
@@ -125,48 +141,13 @@ namespace RiskAnalysis.Persistance.Migrations
                     b.ToTable("Partners");
                 });
 
-            modelBuilder.Entity("RiskAnalysis.Domain.RiskAnalysis", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("AnalysisDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("JobSubjectId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("RiskScore")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JobSubjectId");
-
-                    b.ToTable("RiskAnalyses");
-                });
-
             modelBuilder.Entity("RiskAnalysis.Domain.Agreement", b =>
                 {
                     b.HasOne("RiskAnalysis.Domain.Partner", "Partner")
                         .WithMany("Agreements")
-                        .HasForeignKey("PartnerId");
+                        .HasForeignKey("PartnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Partner");
                 });
@@ -175,18 +156,11 @@ namespace RiskAnalysis.Persistance.Migrations
                 {
                     b.HasOne("RiskAnalysis.Domain.Partner", "Partner")
                         .WithMany("JobSubjects")
-                        .HasForeignKey("PartnerId");
+                        .HasForeignKey("PartnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Partner");
-                });
-
-            modelBuilder.Entity("RiskAnalysis.Domain.RiskAnalysis", b =>
-                {
-                    b.HasOne("RiskAnalysis.Domain.JobSubject", "JobSubject")
-                        .WithMany()
-                        .HasForeignKey("JobSubjectId");
-
-                    b.Navigation("JobSubject");
                 });
 
             modelBuilder.Entity("RiskAnalysis.Domain.Partner", b =>
