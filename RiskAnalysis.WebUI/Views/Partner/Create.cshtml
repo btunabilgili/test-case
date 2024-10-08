@@ -1,0 +1,34 @@
+﻿@model PartnerCreateModel
+
+@{
+    ViewData["Title"] = "Create Partner";
+
+    var isUpdate = Model is not null && Model.Id != Guid.Empty;
+}
+
+<h2>Create New Partner</h2>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<form asp-action="@((isUpdate) ? "Update" : "Create")" method="post">
+    <div class="form-group">
+        <label asp-for="PartnerName"></label>
+        <input asp-for="PartnerName" class="form-control" />
+        <span asp-validation-for="PartnerName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ContactInfo"></label>
+        <input asp-for="ContactInfo" class="form-control" />
+        <span asp-validation-for="ContactInfo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">@((isUpdate) ? "Save Changes" : "Create")</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

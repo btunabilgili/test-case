@@ -19,9 +19,28 @@ namespace RiskAnalysis.Persistance.Extensions
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
-            services.AddTransient<ITestService, TestService>();
+            RegisterApplicationServices(services);
 
             return services;
+        }
+
+
+        private static void RegisterApplicationServices(IServiceCollection services)
+        {
+            var serviceType = typeof(IApplicationService);
+            var assembly = serviceType.Assembly;
+
+            var types = assembly.GetTypes()
+                .Where(t => serviceType.IsAssignableFrom(t) && t.IsClass && !t.IsAbstract);
+
+            foreach (var type in types)
+            {
+                var interfaceType = type.GetInterfaces().FirstOrDefault(i => serviceType.IsAssignableFrom(i));
+                if (interfaceType != null)
+                {
+                    services.AddTransient(interfaceType, type);
+                }
+            }
         }
     }
 }

@@ -44,6 +44,11 @@ namespace RiskAnalysis.Persistance
             return _dbSet.ToListAsync(cancellationToken);
         }
 
+        public Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            return _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
         public Task<T?> GetFirstOrDefault(CancellationToken cancellationToken = default)
         {
             return _dbSet.FirstOrDefaultAsync(cancellationToken);

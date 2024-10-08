@@ -1,8 +1,11 @@
+using RiskAnalysis.Application;
 using RiskAnalysis.Persistance.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+builder.Services.AddAutoMapper(typeof(Program), typeof(IApplicationService));
 
 builder.Services.AddPersistanceServices(builder.Configuration);
 

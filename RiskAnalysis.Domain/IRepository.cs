@@ -9,6 +9,7 @@ namespace RiskAnalysis.Domain
         Task DeleteAsync(T entity, CancellationToken cancellationToken = default);
         Task<List<T>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<List<T>> FindAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default);
+        Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
         Task<T> GetFirstOrDefault(CancellationToken cancellationToken = default);
     }
 }

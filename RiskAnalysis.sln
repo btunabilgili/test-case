@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskAnalysis.Domain", "RiskAnalysis.Domain\RiskAnalysis.Domain.csproj", "{AAC9B1B2-5D2B-4BA3-9B44-B9F2F9A2B11E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskAnalysis.Domain", "RiskAnalysis.Domain\RiskAnalysis.Domain.csproj", "{AAC9B1B2-5D2B-4BA3-9B44-B9F2F9A2B11E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskAnalysis.Application", "RiskAnalysis.Application\RiskAnalysis.Application.csproj", "{FA194483-262E-4E00-A852-A5FB27C5438A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskAnalysis.Application", "RiskAnalysis.Application\RiskAnalysis.Application.csproj", "{FA194483-262E-4E00-A852-A5FB27C5438A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskAnalysis.Persistance", "RiskAnalysis.Persistance\RiskAnalysis.Persistance.csproj", "{BADB6D85-2C2E-4A07-8C86-CFD441FD8DED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskAnalysis.Persistance", "RiskAnalysis.Persistance\RiskAnalysis.Persistance.csproj", "{BADB6D85-2C2E-4A07-8C86-CFD441FD8DED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskAnalysis.WebUI", "RiskAnalysis.WebUI\RiskAnalysis.WebUI.csproj", "{4209D799-126B-4362-A1AF-221C9B10C130}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskAnalysis.WebUI", "RiskAnalysis.WebUI\RiskAnalysis.WebUI.csproj", "{4209D799-126B-4362-A1AF-221C9B10C130}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskAnalysis.WebAPI", "RiskAnalysis.WebAPI\RiskAnalysis.WebAPI.csproj", "{2EF2F838-3C9E-49FF-AEE9-372C72C34354}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskAnalysis.WebAPI", "RiskAnalysis.WebAPI\RiskAnalysis.WebAPI.csproj", "{2EF2F838-3C9E-49FF-AEE9-372C72C34354}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskAnalysis.Common", "RiskAnalysis.Common\RiskAnalysis.Common.csproj", "{59223231-29FA-4DB9-8E6F-B6C734C6AB22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2EF2F838-3C9E-49FF-AEE9-372C72C34354}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EF2F838-3C9E-49FF-AEE9-372C72C34354}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EF2F838-3C9E-49FF-AEE9-372C72C34354}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59223231-29FA-4DB9-8E6F-B6C734C6AB22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59223231-29FA-4DB9-8E6F-B6C734C6AB22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59223231-29FA-4DB9-8E6F-B6C734C6AB22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59223231-29FA-4DB9-8E6F-B6C734C6AB22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

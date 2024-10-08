@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RiskAnalysis.WebUI.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header>
@@ -23,7 +25,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Partner" asp-action="Index">Partner</a>
                         </li>
                     </ul>
                 </div>
@@ -38,12 +40,40 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - RiskAnalysis.WebUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - RiskAnalysis Project
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript">
+        toastr.options = {
+            "positionClass": "toast-top-full-width",
+            "closeButton": true,
+            "timeOut": "2500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        var successMessage = @Html.Raw(JsonSerializer.Serialize(TempData[Constants.SuccessMessage]));
+        var errorMessage = @Html.Raw(JsonSerializer.Serialize(TempData[Constants.ErrorMessage]));
+
+        if (successMessage)
+            toastr.success(successMessage);
+
+        if (errorMessage)
+            toastr.error(errorMessage);
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
