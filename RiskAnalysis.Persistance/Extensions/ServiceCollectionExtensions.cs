@@ -15,6 +15,8 @@ namespace RiskAnalysis.Persistance.Extensions
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("RiskAnalysis.Persistance"));
+
+                options.AddInterceptors(new AuditInterceptor("RiskAnalysis"));
             });
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

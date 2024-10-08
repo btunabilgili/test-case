@@ -18,7 +18,7 @@ namespace RiskAnalysis.Application
     {
         public async Task<ErrorOr<List<PartnerDto>>> GetPartnersAsync(CancellationToken cancellationToken = default)
         {
-            var partners = await repository.GetAllAsync(cancellationToken);
+            var partners = await repository.GetAllAsync(cancellationToken: cancellationToken);
 
             return mapper.Map<List<PartnerDto>>(partners);
         }
@@ -37,7 +37,7 @@ namespace RiskAnalysis.Application
         {
             var partner = mapper.Map<Partner>(dto);
 
-            _ = await repository.CreateAsync(partner, cancellationToken);
+            await repository.CreateAsync(partner, cancellationToken);
 
             return Result.Created;
         }
@@ -51,7 +51,7 @@ namespace RiskAnalysis.Application
 
             mapper.Map(dto, existingPartner);
 
-            _ = await repository.UpdateAsync(existingPartner, cancellationToken);
+            await repository.UpdateAsync(existingPartner, cancellationToken);
 
             return Result.Updated;
         }

@@ -10,12 +10,12 @@ namespace RiskAnalysis.WebUI.Controllers
     {
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            var response = await partnerService.GetPartnersAsync(cancellationToken);
+            var result = await partnerService.GetPartnersAsync(cancellationToken);
 
-            if (response.IsError)
-                return View("Error", response.FirstError.Description);
+            if (result.IsError)
+                TempData[Constants.ErrorMessage] = result.FirstError.Description;
 
-            return View(mapper.Map<List<PartnerModel>>(response.Value));
+            return View(mapper.Map<List<PartnerModel>>(result.Value));
         }
 
         public IActionResult Create()

@@ -39,9 +39,14 @@ namespace RiskAnalysis.Persistance
             return _dbSet.Where(predicate).ToListAsync(cancellationToken);
         }
 
-        public Task<List<T>> GetAllAsync(CancellationToken cancellationToken = default)
+        public Task<List<T>> GetAllAsync(Expression<Func<T, object>>? include = null, CancellationToken cancellationToken = default)
         {
-            return _dbSet.ToListAsync(cancellationToken);
+            var queryable = _dbSet.AsQueryable();
+
+            if (include is not null)
+                queryable = queryable.Include(include);
+
+            return queryable.ToListAsync(cancellationToken);
         }
 
         public Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
