@@ -1,4 +1,4 @@
-﻿namespace RiskAnalysis.Application.Auth
+﻿namespace RiskAnalysis.Application
 {
     public class UserDto
     {

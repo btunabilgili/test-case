@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using RiskAnalysis.Domain;
 
-namespace RiskAnalysis.Application.Auth
+namespace RiskAnalysis.Application
 {
     public class UserProfile : Profile
     {

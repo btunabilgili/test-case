@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace RiskAnalysis.Application.Auth
+namespace RiskAnalysis.Application
 {
     public interface IPasswordHashService : IApplicationService
     {

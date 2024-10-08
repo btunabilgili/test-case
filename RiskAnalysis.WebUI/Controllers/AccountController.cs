@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using RiskAnalysis.Application.Auth;
-using RiskAnalysis.Application.Authentication;
+using RiskAnalysis.Application;
 using RiskAnalysis.WebUI.Models;
 using System.Security.Claims;
 

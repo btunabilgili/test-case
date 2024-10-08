@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using RiskAnalysis.Application.Auth;
+using RiskAnalysis.Application;
 using RiskAnalysis.WebUI.Models;
 
 namespace RiskAnalysis.WebUI.Profiles

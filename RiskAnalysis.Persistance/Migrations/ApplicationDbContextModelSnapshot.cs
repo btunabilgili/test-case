@@ -75,6 +75,9 @@ namespace RiskAnalysis.Persistance.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("AgreementId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -82,7 +85,7 @@ namespace RiskAnalysis.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PartnerId")
+                    b.Property<Guid?>("PartnerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal?>("RiskScore")
@@ -99,6 +102,8 @@ namespace RiskAnalysis.Persistance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AgreementId");
 
                     b.HasIndex("PartnerId");
 
@@ -190,13 +195,17 @@ namespace RiskAnalysis.Persistance.Migrations
 
             modelBuilder.Entity("RiskAnalysis.Domain.JobSubject", b =>
                 {
-                    b.HasOne("RiskAnalysis.Domain.Partner", "Partner")
-                        .WithMany("JobSubjects")
-                        .HasForeignKey("PartnerId")
+                    b.HasOne("RiskAnalysis.Domain.Agreement", "Agreement")
+                        .WithMany()
+                        .HasForeignKey("AgreementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Partner");
+                    b.HasOne("RiskAnalysis.Domain.Partner", null)
+                        .WithMany("JobSubjects")
+                        .HasForeignKey("PartnerId");
+
+                    b.Navigation("Agreement");
                 });
 
             modelBuilder.Entity("RiskAnalysis.Domain.Partner", b =>

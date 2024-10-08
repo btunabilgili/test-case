@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using ErrorOr;
-using RiskAnalysis.Application.Auth;
 using RiskAnalysis.Domain;
 
-namespace RiskAnalysis.Application.Authentication
+namespace RiskAnalysis.Application
 {
     public interface IAuthService : IApplicationService
     {
