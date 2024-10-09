@@ -8,5 +8,9 @@
         public const string UpdatedSuccessfully = "The record has been updated successfully.";
         public const string DeletedSuccessfully = "The record has been deleted successfully.";
         public const string RecordNotFound = "The specified record was not found.";
+
+
+
+        public const string PartnerIdClaim = "PartnerId";
     }
 }

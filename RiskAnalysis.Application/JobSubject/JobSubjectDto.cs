@@ -1,4 +1,4 @@
-﻿namespace RiskAnalysis.Application.JobSubject
+﻿namespace RiskAnalysis.Application
 {
     public class JobSubjectDto
     {

@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace RiskAnalysis.WebUI.Controllers
 {
-    public class AccountController(IAuthService authService, IMapper mapper) : Controller
+    public class AccountController(IUserAuthService authService, IMapper mapper) : Controller
     {
         public IActionResult Login()
         {

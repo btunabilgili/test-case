@@ -4,19 +4,23 @@ using RiskAnalysis.Domain;
 
 namespace RiskAnalysis.Application
 {
-    public interface IAuthService : IApplicationService
+    public interface IUserAuthService : IApplicationService
     {
         Task<ErrorOr<UserDto>> ValidateUserAsync(UserDto userDto, CancellationToken cancellationToken = default);
         Task<ErrorOr<UserDto>> RegisterUserAsync(UserDto userDto);
     }
 
-    public class AuthService(IRepository<User> repository, IMapper mapper) : IAuthService
+    public class UserAuthService(IRepository<User> repository, IMapper mapper) : IUserAuthService
     {
         public async Task<ErrorOr<UserDto>> ValidateUserAsync(UserDto userDto, CancellationToken cancellationToken = default)
         {
             var mappedUser = mapper.Map<User>(userDto);
 
-            var user = await repository.GetFirstOrDefaultAsync(x => x.Username == mappedUser.Username && x.Password == mappedUser.Password, cancellationToken);
+            var user = await repository.GetFirstOrDefaultAsync(
+                predicate: x =>
+                    x.Username == mappedUser.Username &&
+                    x.Password == mappedUser.Password,
+                cancellationToken);
 
             if (user is null)
                 return Error.Unauthorized(description: "Username or password is invalid");

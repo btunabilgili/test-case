@@ -3,9 +3,9 @@ using RiskAnalysis.WebAPI.Models;
 
 namespace RiskAnalysis.WebAPI.Validators
 {
-    public class JobSubjectValidator : AbstractValidator<JobSubjectModel>
+    public class JobSubjectRequestValidator : AbstractValidator<JobSubjectRequest>
     {
-        public JobSubjectValidator()
+        public JobSubjectRequestValidator()
         {
             RuleFor(x => x.AgreementId).NotEmpty();
             RuleFor(x => x.SubjectDetails).NotEmpty();
