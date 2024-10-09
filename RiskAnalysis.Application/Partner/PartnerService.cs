@@ -18,7 +18,7 @@ namespace RiskAnalysis.Application
     {
         public async Task<ErrorOr<List<PartnerDto>>> GetPartnersAsync(CancellationToken cancellationToken = default)
         {
-            var partners = await repository.GetAllAsync(cancellationToken: cancellationToken);
+            var partners = await repository.GetAllAsync(include: x => x.ServiceUser, cancellationToken: cancellationToken);
 
             return mapper.Map<List<PartnerDto>>(partners);
         }
@@ -35,6 +35,9 @@ namespace RiskAnalysis.Application
 
         public async Task<ErrorOr<Created>> CreatePartnerAsync(PartnerDto dto, CancellationToken cancellationToken = default)
         {
+            if (await repository.GetFirstOrDefaultAsync(x => x.PartnerName == dto.PartnerName, cancellationToken) is not null)
+                return Error.Validation(description: "PartnerName already exits!");
+
             var partner = mapper.Map<Partner>(dto);
 
             await repository.CreateAsync(partner, cancellationToken);
@@ -44,6 +47,9 @@ namespace RiskAnalysis.Application
 
         public async Task<ErrorOr<Updated>> UpdatePartnerAsync(Guid id, PartnerDto dto, CancellationToken cancellationToken = default)
         {
+            if (await repository.GetFirstOrDefaultAsync(x => x.Id != id && x.PartnerName == dto.PartnerName, cancellationToken) is not null)
+                return Error.Validation(description: "PartnerName already exits!");
+
             var existingPartner = await repository.GetByIdAsync(id, cancellationToken);
 
             if (existingPartner is null)

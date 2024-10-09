@@ -6,7 +6,7 @@ using RiskAnalysis.WebUI.Models;
 
 namespace RiskAnalysis.WebUI.Controllers
 {
-    public class PartnerController(IPartnerService partnerService, IMapper mapper) : BaseController
+    public class PartnerController(IPartnerService partnerService, IServiceAuthService authService, IMapper mapper) : BaseController
     {
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
@@ -93,6 +93,36 @@ namespace RiskAnalysis.WebUI.Controllers
                 TempData[Constants.SuccessMessage] = Constants.DeletedSuccessfully;
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult CreatePartnerUserModal(PartnerUserModel userModel)
+        {
+            var model = new PartnerUserCreateModel
+            {
+                Id = userModel.Id,
+                PartnerId = userModel.PartnerId,
+                Username = userModel.Username
+            };
+
+            return PartialView("_CreatePartnerUserModal", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePartnerUser(PartnerUserCreateModel model, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+                return PartialView("_CreatePartnerUserModal", model);
+
+            var serviceUserDto = mapper.Map<ServiceUserDto>(model);
+
+            var result = await authService.RegisterUserAsync(serviceUserDto, cancellationToken);
+
+            if (result.IsError)
+                TempData[Constants.ErrorMessage] = result.FirstError.Description;
+            else
+                TempData[Constants.SuccessMessage] = Constants.CreatedSuccessfully;
+
+            return RedirectToAction("Index");
         }
     }
 }

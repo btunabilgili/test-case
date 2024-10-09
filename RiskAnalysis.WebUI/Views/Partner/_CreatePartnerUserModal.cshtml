@@ -1,0 +1,43 @@
+﻿@model PartnerUserCreateModel
+
+@{
+    var isView = Model != null && Model.Id != Guid.Empty;
+}
+
+<div class="modal fade" id="userCreateModal" tabindex="-1" role="dialog" aria-labelledby="userCreateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userCreateModalLabel">@(isView ? string.Empty : "Create") Partner User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="CreatePartnerUser" asp-controller="Partner" method="post">
+                    <input type="hidden" asp-for="PartnerId" value="@Model?.PartnerId" />
+                    <div class="form-group">
+                        <label asp-for="Username"></label>
+                        @if(!isView)
+                        {
+                            <input type="text" class="form-control" asp-for="Username" />
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control" asp-for="Username"  readonly />
+                        }
+                    </div>
+                    @if (!isView)
+                    {
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input type="password" class="form-control" asp-for="Password" />
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Create User</button>
+                    }
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

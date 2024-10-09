@@ -1,6 +1,6 @@
-﻿namespace RiskAnalysis.Application
+﻿namespace RiskAnalysis.WebUI.Models
 {
-    public class ServiceUserDto
+    public class PartnerUserCreateModel
     {
         public Guid Id { get; set; }
         public Guid PartnerId { get; set; }

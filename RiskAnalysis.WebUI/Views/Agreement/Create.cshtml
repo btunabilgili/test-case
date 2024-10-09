@@ -18,19 +18,19 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="PartnerId"></label>
+        <label asp-for="PartnerId">Partner</label>
         <select asp-for="PartnerId" class="form-control" asp-items="Model?.Partners"></select>
         <span asp-validation-for="PartnerId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="AgreementDate"></label>
+        <label asp-for="AgreementDate">Agreement Date</label>
         <input asp-for="AgreementDate" class="form-control" type="date" />
         <span asp-validation-for="AgreementDate" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="AgreementDetails"></label>
+        <label asp-for="AgreementDetails">Agreement Details</label>
         <textarea asp-for="AgreementDetails" class="form-control"></textarea>
         <span asp-validation-for="AgreementDetails" class="text-danger"></span>
     </div>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="RiskLevel"></label>
+        <label asp-for="RiskLevel">Risk Level</label>
         <input asp-for="RiskLevel" class="form-control" type="number" step="0.01" />
         <span asp-validation-for="RiskLevel" class="text-danger"></span>
     </div>

@@ -26,6 +26,11 @@
                         <form method="post" asp-controller="Partner" asp-action="Delete" asp-route-id="@partner.Id" class="d-inline" onsubmit="return confirmDelete();">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
+
+                        <button class="btn @(partner.User != null && partner.Id != Guid.Empty ? "btn-secondary" : "btn-success") btn-sm" data-id="@partner.Id" onclick="openUserCreateModal('@partner.User?.Id', '@partner.Id', '@partner.User?.Username')">
+                            <i class="fas fa-user"></i>
+                        </button>
+
                     </td>
                     <td>@partner.Id</td>
                     <td>@partner.PartnerName</td>
@@ -36,6 +41,8 @@
         </tbody>
     </table>
 </div>
+
+<div id="modalContainer"></div>
 
 @section Scripts {
     <script>
@@ -52,10 +59,33 @@
                     }
                 }
             });
+
+            $('.modal .close, .modal .btn-secondary').on('click', function () {
+                $('#userCreateModal').modal('hide');
+            });
         });
 
          function confirmDelete() {
             return confirm("Are you sure you want to delete this partner?");
+        }
+
+        function openUserCreateModal(id, partnerId, username) {
+            $.ajax({
+                url: '@Url.Action("CreatePartnerUserModal", "Partner")',
+                type: 'GET',
+                data: { 
+                    id: id,
+                    partnerId: partnerId,
+                    username: username
+                },
+                success: function (response) {
+                    $('#modalContainer').html(response);
+                    $('#userCreateModal').modal('show');
+                },
+                error: function () {
+                    alert('Error loading create user modal.');
+                }
+            });
         }
     </script>
 }

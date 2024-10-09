@@ -8,5 +8,6 @@
 
         public ICollection<Agreement> Agreements { get; set; } = [];
         public ICollection<JobSubject> JobSubjects { get; set; } = [];
+        public ServiceUser? ServiceUser { get; set; }
     }
 }
