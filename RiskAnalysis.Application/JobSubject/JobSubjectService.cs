@@ -42,7 +42,9 @@ namespace RiskAnalysis.Application
         private static decimal CalculateRiskScore(string subjectDetail, string keywords, decimal riskLevel)
         {
             var keywordsList = keywords.Split(',');
+
             int keywordCounter = 0;
+            int defaultRiskScore = 10;
 
             foreach (var keyword in keywordsList)
             {
@@ -50,7 +52,7 @@ namespace RiskAnalysis.Application
                     keywordCounter++;
             }
 
-            return keywordCounter * riskLevel;
+            return keywordCounter == 0 ? defaultRiskScore : keywordCounter * riskLevel;
         }
     }
 }

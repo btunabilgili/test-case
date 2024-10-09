@@ -3,6 +3,6 @@
     public class JobSubjectRequest
     {
         public Guid AgreementId { get; set; }
-        public string SubjectDetails { get; set; } = string.Empty;
+        public string JobSubjectDetails { get; set; } = string.Empty;
     }
 }

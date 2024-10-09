@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using RiskAnalysis.Application;
+using RiskAnalysis.WebAPI.Extensions;
 using RiskAnalysis.WebAPI.Models;
 
 namespace RiskAnalysis.WebAPI.Endpoints
@@ -13,6 +14,7 @@ namespace RiskAnalysis.WebAPI.Endpoints
                 IJobSubjectService service,
                 IValidator<JobSubjectRequest> validator,
                 IMapper mapper,
+                HttpContext httpContext,
                 JobSubjectRequest request,
                 CancellationToken cancellationToken) =>
             {
@@ -23,12 +25,12 @@ namespace RiskAnalysis.WebAPI.Endpoints
 
                 var jobSubjectDto = mapper.Map<JobSubjectDto>(request);
 
-                var result = await service.CreateJobSubjectAsync(jobSubjectDto, Guid.NewGuid(), cancellationToken);
+                var result = await service.CreateJobSubjectAsync(jobSubjectDto, httpContext.User.GetPartnerId(), cancellationToken);
 
                 if (result.IsError)
                     return Results.Problem(result.FirstError.Description);
 
-                return Results.Ok(result.Value.RiskScore);
+                return Results.Ok(new { result.Value.RiskScore });
             });
         }
     }

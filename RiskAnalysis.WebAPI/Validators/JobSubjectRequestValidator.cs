@@ -8,7 +8,7 @@ namespace RiskAnalysis.WebAPI.Validators
         public JobSubjectRequestValidator()
         {
             RuleFor(x => x.AgreementId).NotEmpty();
-            RuleFor(x => x.SubjectDetails).NotEmpty();
+            RuleFor(x => x.JobSubjectDetails).NotEmpty();
         }
     }
 }

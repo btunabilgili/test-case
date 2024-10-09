@@ -35,7 +35,7 @@ namespace RiskAnalysis.WebAPI.Endpoints
                 if (result.IsError)
                     return Results.Problem(result.FirstError.Description);
 
-                var (token, expireDate) = GenerateJwtToken(configuration, Guid.NewGuid());
+                var (token, expireDate) = GenerateJwtToken(configuration, result.Value.PartnerId);
 
                 return Results.Ok(new { token, expireDate });
             }).AllowAnonymous();
