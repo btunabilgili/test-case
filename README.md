@@ -42,4 +42,5 @@ Alternatively, a user can be created from the registration section.
 ```
 
 ### Table Diagram
-![Alt text](https://raw.githubusercontent.com/btunabilgili/test-case/master/sql_diagram.png)
+<img src="https://raw.githubusercontent.com/btunabilgili/test-case/master/sql_diagram.png" alt="Alt text" width="400"/>
+
