@@ -1,5 +1,15 @@
 # Risk Analysis Application
 
+### Technologies Used
+
+- **Asp.Net Core MVC (.NET 8):**
+- **Asp.Net Core Minimal API (.NET 8):**
+- **Entity Framework Core:**
+- **FluentValidation:**
+- **AutoMapper:**
+- **JWT (JSON Web Tokens):** 
+
+
 ### Migration Commands
 To run migrations, use the following command:
 
