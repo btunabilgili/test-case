@@ -42,4 +42,4 @@ Alternatively, a user can be created from the registration section.
 ```
 
 ### Table Diagram
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![Alt text](https://raw.githubusercontent.com/btunabilgili/test-case/master/sql_diagram.png)
